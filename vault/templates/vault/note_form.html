@@ -1,0 +1,15 @@
+{% extends "vault/base.html" %}
+{% block title %}Add entry{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Add an entry</h1>
+  <form method="post">{% csrf_token %}
+    <label for="k">Type</label>
+    <select id="k" name="kind"><option value="note">Private note</option><option value="expense">Expense</option></select>
+    <label for="t">Title</label><input id="t" name="title" required>
+    <label for="a">Amount (EUR, expenses only)</label><input id="a" name="amount" inputmode="decimal">
+    <label for="c">Content</label><textarea id="c" name="content" rows="5"></textarea>
+    <button type="submit">Save</button>
+  </form>
+</div>
+{% endblock %}

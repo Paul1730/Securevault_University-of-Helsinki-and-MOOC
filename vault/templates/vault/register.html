@@ -1,0 +1,12 @@
+{% extends "vault/base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Create an account</h1>
+  <form method="post">{% csrf_token %}
+    <label for="u">Username</label><input id="u" name="username" autofocus>
+    <label for="p">Password</label><input id="p" name="password" type="password">
+    <button type="submit">Register</button>
+  </form>
+</div>
+{% endblock %}

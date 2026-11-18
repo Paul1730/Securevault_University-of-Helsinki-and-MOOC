@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}SecureVault{% endblock %} - SecureVault</title>
+  <style>
+    :root { --bg:#f4f6fb; --card:#fff; --ink:#1d2433; --muted:#667085; --brand:#2f5bea; --danger:#c62828; --ok:#1b7f3b; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); min-height:100vh; display:flex; flex-direction:column; }
+    nav { background:var(--ink); color:#fff; padding:12px 24px; display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+    nav a { color:#cfd8ff; text-decoration:none; }
+    nav a:hover { color:#fff; }
+    nav .brand { font-weight:700; font-size:1.15rem; color:#fff; margin-right:auto; }
+    nav .by { font-size:.85rem; color:#9fb0ff; }
+    main { flex:1; width:100%; max-width:860px; margin:24px auto; padding:0 16px; }
+    .card { background:var(--card); border-radius:10px; padding:20px; margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+    h1,h2 { margin-top:0; }
+    label { display:block; margin:10px 0 4px; font-weight:600; }
+    input, select, textarea { width:100%; padding:9px; border:1px solid #c5ccdb; border-radius:6px; font:inherit; }
+    button, .btn { background:var(--brand); color:#fff; border:0; padding:9px 16px; border-radius:6px; cursor:pointer; font:inherit; text-decoration:none; display:inline-block; margin-top:12px; }
+    button.danger { background:var(--danger); }
+    table { width:100%; border-collapse:collapse; }
+    td, th { text-align:left; padding:8px; border-bottom:1px solid #e6e9f2; }
+    .msg { padding:10px 14px; border-radius:6px; margin-bottom:12px; }
+    .msg.error { background:#fdecea; color:var(--danger); }
+    .msg.success { background:#e6f4ea; color:var(--ok); }
+    .muted { color:var(--muted); }
+    form.inline { display:inline; }
+    footer { text-align:center; padding:16px; color:var(--muted); font-size:.9rem; }
+    footer strong { color:var(--ink); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="{% url 'index' %}">SecureVault</a>
+    <span class="by">Created by Pablo Landos</span>
+    {% if user.is_authenticated %}
+      <a href="{% url 'index' %}">My vault</a>
+      <a href="{% url 'add_note' %}">Add entry</a>
+      <a href="{% url 'security_settings' %}">Security</a>
+      <a href="{% url 'logout' %}">Log out ({{ user.username }})</a>
+    {% else %}
+      <a href="{% url 'login' %}">Log in</a>
+      <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+  </nav>
+  <main>
+    {% for message in messages %}<div class="msg {{ message.tags }}">{{ message }}</div>{% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>SecureVault - Personal Expense &amp; Note Vault &middot; <strong>Created by Pablo Landos</strong></footer>
+</body>
+</html>

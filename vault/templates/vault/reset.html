@@ -1,0 +1,14 @@
+{% extends "vault/base.html" %}
+{% block title %}Reset password{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Reset password</h1>
+  <p class="muted">Enter your username and the 4-digit backup PIN you set under Security.</p>
+  <form method="post">{% csrf_token %}
+    <label for="u">Username</label><input id="u" name="username" autofocus>
+    <label for="pin">Backup PIN</label><input id="pin" name="pin" inputmode="numeric" maxlength="4">
+    <label for="np">New password</label><input id="np" name="new_password" type="password">
+    <button type="submit">Reset password</button>
+  </form>
+</div>
+{% endblock %}
